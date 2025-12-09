@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Call Analyzer - Sharan Enterprises</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0a192f 0%, #1a2332 50%, #0f1419 100%);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animated background particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) translateX(0);
+                opacity: 0.3;
+            }
+
+            25% {
+                transform: translateY(-100px) translateX(50px);
+                opacity: 0.6;
+            }
+
+            50% {
+                transform: translateY(-50px) translateX(-50px);
+                opacity: 0.4;
+            }
+
+            75% {
+                transform: translateY(-150px) translateX(100px);
+                opacity: 0.5;
+            }
+        }
+
+        /* Glassmorphism card */
+        .glass-card {
+            background: rgba(26, 35, 50, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5),
+                0 0 50px rgba(212, 175, 55, 0.1);
+            animation: slideUp 0.8s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Gradient text animation */
+        .gradient-text {
+            background: linear-gradient(90deg, #d4af37, #f4e4c1, #d4af37, #f4e4c1);
+            background-size: 300% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 3s ease infinite;
+        }
+
+        @keyframes gradientShift {
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        /* Glowing button */
+        .glow-button {
+            position: relative;
+            background: linear-gradient(135deg, #d4af37 0%, #f4e4c1 100%);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .glow-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .glow-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .glow-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Textarea focus effect */
+        .custom-textarea {
+            transition: all 0.3s ease;
+            background: rgba(15, 20, 25, 0.6);
+            border: 2px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .custom-textarea:focus {
+            background: rgba(15, 20, 25, 0.8);
+            border-color: #d4af37;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+            transform: scale(1.01);
+        }
+
+        /* Pulse animation for logo */
+        .pulse-glow {
+            animation: pulseGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes pulseGlow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 0 40px rgba(212, 175, 55, 0.6);
+            }
+        }
+
+        /* Loading spinner */
+        .spinner {
+            border: 3px solid rgba(212, 175, 55, 0.1);
+            border-top: 3px solid #d4af37;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            display: none;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Feature cards animation */
+        .feature-card {
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col items-center justify-center p-4 relative">
+
+    <!-- Animated background particles -->
+    <div class="particles">
+        <div class="particle" style="width: 100px; height: 100px; top: 10%; left: 10%; animation-delay: 0s;"></div>
+        <div class="particle" style="width: 150px; height: 150px; top: 60%; left: 80%; animation-delay: 2s;"></div>
+        <div class="particle" style="width: 80px; height: 80px; top: 80%; left: 20%; animation-delay: 4s;"></div>
+        <div class="particle" style="width: 120px; height: 120px; top: 30%; left: 70%; animation-delay: 6s;"></div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="relative z-10 w-full max-w-4xl">
+
+        <!-- Logo/Header Section -->
+        <div class="text-center mb-8 animate-fadeIn">
+            <div class="inline-block p-4 rounded-full bg-gradient-to-br from-yellow-600 to-yellow-800 pulse-glow mb-4">
+                <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
+                    </path>
+                </svg>
+            </div>
+            <h1 class="text-5xl font-extrabold mb-3 gradient-text">
+                Sales Call Analyzer
+            </h1>
+            <p class="text-gray-400 text-lg">Sharan Enterprises | AI-Powered Sales Intelligence</p>
+        </div>
+
+        <!-- Main Card -->
+        <div class="glass-card p-10 rounded-3xl">
+            {% if error %}
+            <div class="bg-red-900/50 border border-red-500 text-red-200 px-4 py-3 rounded-xl mb-6 relative"
+                role="alert">
+                <strong class="font-bold">Error!</strong>
+                <span class="block sm:inline">{{ error }}</span>
+            </div>
+            {% endif %}
+
+            <form action="/analyze" method="post" enctype="multipart/form-data" class="space-y-8" id="analyzeForm">
+
+                <!-- Input Section -->
+                <div>
+                    <label for="audio_file" class="block text-sm font-semibold text-gray-300 mb-3 flex items-center">
+                        <svg class="w-5 h-5 mr-2 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z">
+                            </path>
+                        </svg>
+                        Upload Call Recording (Audio)
+                    </label>
+
+                    <div class="relative group">
+                        <input type="file" id="audio_file" name="audio_file" accept="audio/*" required
+                            class="w-full px-5 py-4 rounded-xl bg-gray-900/60 border-2 border-yellow-500/20 text-gray-300 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-yellow-500 file:text-gray-900 hover:file:bg-yellow-400 transition-all cursor-pointer focus:outline-none focus:border-yellow-500/50">
+                        <p class="mt-2 text-xs text-gray-500">Supported formats: WAV, MP3, M4A (Max 50MB)</p>
+                    </div>
+
+                    <!-- Audio Preview -->
+                    <div id="audioPreviewContainer" class="mt-4 hidden transition-all duration-300 ease-in-out">
+                        <p class="text-sm font-semibold text-gray-300 mb-2">Audio Preview:</p>
+                        <audio id="audioPlayer" controls
+                            class="w-full rounded-lg bg-gray-900/60 border border-yellow-500/20">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
+                </div>
+
+                <!-- Features Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div
+                        class="feature-card bg-gradient-to-br from-blue-900/30 to-blue-800/20 p-4 rounded-xl border border-blue-700/30">
+                        <div class="text-blue-400 mb-2">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-white font-semibold text-sm">Sentiment Analysis</h3>
+                        <p class="text-gray-400 text-xs mt-1">AI-powered emotion detection</p>
+                    </div>
+                    <div
+                        class="feature-card bg-gradient-to-br from-purple-900/30 to-purple-800/20 p-4 rounded-xl border border-purple-700/30">
+                        <div class="text-purple-400 mb-2">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-white font-semibold text-sm">Performance Metrics</h3>
+                        <p class="text-gray-400 text-xs mt-1">Detailed scoring dashboard</p>
+                    </div>
+                    <div
+                        class="feature-card bg-gradient-to-br from-green-900/30 to-green-800/20 p-4 rounded-xl border border-green-700/30">
+                        <div class="text-green-400 mb-2">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="text-white font-semibold text-sm">Key Phrase Extraction</h3>
+                        <p class="text-gray-400 text-xs mt-1">Identify critical discussion points</p>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="flex items-center justify-center space-x-4 mt-8">
+                    <button type="submit"
+                        class="glow-button relative w-full py-4 px-8 text-gray-900 font-bold text-lg rounded-xl shadow-2xl focus:outline-none focus:ring-4 focus:ring-yellow-500/50 transition-all duration-300">
+                        <span class="relative z-10 flex items-center justify-center">
+                            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 10V3L4 14h7v7l9-11h-7z">
+                                </path>
+                            </svg>
+                            Analyze Call Now
+                        </span>
+                    </button>
+                </div>
+
+                <!-- Loading Spinner and Status -->
+                <div class="flex flex-col items-center justify-center mt-4">
+                    <div class="spinner" id="spinner"></div>
+                    <p id="statusText" class="text-gray-400 text-sm mt-2" style="display: none;"></p>
+                </div>
+            </form>
+
+            <!-- Dashboard Link -->
+            <div class="text-center mt-6">
+                <a href="/dashboard"
+                    class="text-yellow-500/60 hover:text-yellow-500 text-sm font-medium transition-colors border-b border-yellow-500/30 hover:border-yellow-500 pb-0.5">
+                    View Admin Dashboard
+                </a>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-8 text-center text-gray-500 text-sm">
+            <p>Powered by Groq AI • Advanced Sales Analytics Platform</p>
+            <p class="mt-1 text-xs">© 2025 Sharan Enterprises. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Use existing UI elements
+        const form = document.getElementById('analyzeForm');
+        const spinner = document.getElementById('spinner');
+        const statusText = document.getElementById('statusText');
+        const previewContainer = document.getElementById('audioPreviewContainer');
+        const audioPlayer = document.getElementById('audioPlayer');
+
+        // Handle Audio Preview
+        document.getElementById('audio_file').addEventListener('change', function (e) {
+            const file = e.target.files[0];
+            if (file) {
+                const fileURL = URL.createObjectURL(file);
+                audioPlayer.src = fileURL;
+                previewContainer.classList.remove('hidden');
+            } else {
+                audioPlayer.src = '';
+                previewContainer.classList.add('hidden');
+            }
+        });
+
+        // Async Upload & Polling
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            // UI Reset
+            spinner.style.display = 'block';
+            statusText.style.display = 'block';
+            statusText.innerText = "Uploading audio...";
+            statusText.className = "text-yellow-500 font-medium text-sm mt-2 animate-pulse";
+            previewContainer.classList.add('hidden');
+
+            // Prepare Data
+            const formData = new FormData(form);
+
+            try {
+                // 1. Upload
+                const uploadRes = await fetch('/api/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (!uploadRes.ok) throw new Error("Upload failed");
+                const uploadData = await uploadRes.json();
+                const requestId = uploadData.request_id;
+
+                statusText.innerText = "Processing started... (ID: " + requestId.slice(0, 8) + ")";
+
+                // 2. Poll for Status
+                const pollInterval = setInterval(async () => {
+                    try {
+                        const statusRes = await fetch(`/api/status/${requestId}`);
+                        const statusData = await statusRes.json();
+
+                        if (statusData.report_ready === true || statusData.status === 'completed') {
+                            clearInterval(pollInterval);
+                            spinner.style.display = 'none';
+
+                            // Success UI
+                            statusText.className = "text-green-400 font-bold text-lg mt-4";
+                            statusText.innerHTML = `
+                                <div>✅ Analysis Complete!</div>
+                                <div class="flex flex-col space-y-3 mt-4">
+                                    <a href="${statusData.report_url}" target="_blank" 
+                                       class="glow-button py-3 px-6 rounded-lg text-gray-900 font-bold hover:scale-105 transition-transform">
+                                       Download PDF Report
+                                    </a>
+                                </div>
+                            `;
+                        } else if (statusData.status === 'failed') {
+                            clearInterval(pollInterval);
+                            spinner.style.display = 'none';
+                            statusText.className = "text-red-500 font-bold mt-2";
+                            statusText.innerText = "Error: " + (statusData.message || "Processing failed");
+                        } else {
+                            // Update Status Message
+                            statusText.innerText = statusData.message || "Processing...";
+                        }
+                    } catch (err) {
+                        console.error("Polling error", err);
+                    }
+                }, 2000); // Poll every 2 seconds
+
+            } catch (error) {
+                console.error(error);
+                spinner.style.display = 'none';
+                statusText.className = "text-red-500 font-bold mt-2";
+                statusText.innerText = "Error: " + error.message;
+            }
+        });
+    </script>
+
+</body>
+
+</html>

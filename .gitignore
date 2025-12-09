@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.env
+sales_data.db
+reports/
+WAV/
+temp_*
+*.log
+.DS_Store
+
+gcp-credentials.json

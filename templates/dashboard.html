@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Sales Analytics</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/dashboard.css">
+</head>
+
+<body class="min-h-screen p-8 relative text-gray-200">
+
+    <!-- Animated background particles -->
+    <div class="particles">
+        <div class="particle" style="width: 150px; height: 150px; top: 10%; left: 10%; animation-delay: 0s;"></div>
+        <div class="particle" style="width: 100px; height: 100px; top: 60%; left: 80%; animation-delay: 2s;"></div>
+        <div class="particle" style="width: 200px; height: 200px; top: 40%; left: 40%; animation-delay: 4s;"></div>
+    </div>
+
+    <div class="relative z-10 max-w-7xl mx-auto">
+        <!-- Header -->
+        <div class="flex flex-col md:flex-row justify-between items-center mb-10 animate-fadeIn">
+            <div class="mb-6 md:mb-0 text-center md:text-left">
+                <div class="flex items-center justify-center md:justify-start mb-2">
+                    <div class="p-2 rounded-full bg-yellow-600/20 mr-3">
+                        <svg class="w-8 h-8 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
+                            </path>
+                        </svg>
+                    </div>
+                    <h1 class="text-4xl font-extrabold gradient-text">Sales Analytics</h1>
+                </div>
+                <p class="text-gray-400 text-sm tracking-wide">Admin Dashboard & Performance Overview</p>
+            </div>
+
+            <div class="flex items-center space-x-4">
+                <!-- Export Options -->
+                <div class="flex space-x-2">
+                    <a href="/export/csv"
+                        class="px-4 py-2 bg-green-600/20 hover:bg-green-600 text-green-400 hover:text-white border border-green-500/30 text-sm font-bold rounded-lg transition-all flex items-center">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                            </path>
+                        </svg>
+                        CSV
+                    </a>
+                    <a href="/export/excel"
+                        class="px-4 py-2 bg-blue-600/20 hover:bg-blue-600 text-blue-400 hover:text-white border border-blue-500/30 text-sm font-bold rounded-lg transition-all flex items-center">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                            </path>
+                        </svg>
+                        Excel
+                    </a>
+                </div>
+
+                <a href="/"
+                    class="glow-button px-8 py-3 rounded-xl font-bold text-gray-900 shadow-lg hover:scale-105 transition-transform flex items-center">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                    </svg>
+                    New Analysis
+                </a>
+            </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10 animate-slideUp">
+            <!-- Total Calls -->
+            <div class="glass-card p-8 rounded-2xl flex items-center justify-between group">
+                <div>
+                    <p class="text-gray-400 text-xs font-bold uppercase tracking-widest mb-2">Total Calls Analyzed</p>
+                    <h2 class="text-6xl font-bold text-white group-hover:text-blue-400 transition-colors">
+                        {{ total_calls }}</h2>
+                </div>
+                <div
+                    class="p-5 bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-400 group-hover:bg-blue-500/20 transition-colors">
+                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z">
+                        </path>
+                    </svg>
+                </div>
+            </div>
+            <!-- Avg Score -->
+            <div class="glass-card p-8 rounded-2xl flex items-center justify-between group">
+                <div>
+                    <p class="text-gray-400 text-xs font-bold uppercase tracking-widest mb-2">Average Team Score</p>
+                    <h2 class="text-6xl font-bold text-white group-hover:text-yellow-400 transition-colors">
+                        {{ avg_score }}</h2>
+                </div>
+                <div
+                    class="p-5 bg-yellow-500/10 border border-yellow-500/20 rounded-full text-yellow-400 group-hover:bg-yellow-500/20 transition-colors">
+                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
+                        </path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table -->
+        <div class="glass-card rounded-2xl overflow-hidden animate-slideUp" style="animation-delay: 0.4s;">
+            <div class="p-6 border-b border-gray-700/50 flex flex-col md:flex-row justify-between items-center gap-4">
+                <h3 class="text-xl font-bold text-white flex items-center">
+                    <svg class="w-5 h-5 mr-2 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    Recent Analysis History
+                </h3>
+                <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+                    <!-- Search -->
+                    <div class="relative">
+                        <input type="text" id="searchInput" placeholder="Search salesman or file..."
+                            class="w-full sm:w-64 bg-gray-800/50 border border-gray-600 text-gray-300 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block pl-10 p-2.5 placeholder-gray-500"
+                            onkeyup="filterTable()">
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                            <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                fill="none" viewBox="0 0 20 20">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a 7 7 0 0 1 14 0Z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <!-- Filter -->
+                    <select id="scoreFilter"
+                        class="bg-gray-800/50 border border-gray-600 text-gray-300 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block p-2.5"
+                        onchange="filterTable()">
+                        <option value="all">All Scores</option>
+                        <option value="high">High (>80)</option>
+                        <option value="medium">Medium (50-79)</option>
+                        <option value="low">Low (<50)< /option>
+                    </select>
+                </div>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left">
+                    <thead class="bg-gray-800/50 text-gray-400 uppercase text-xs font-bold tracking-wider">
+                        <tr>
+                            <th class="px-6 py-5">Date</th>
+                            <th class="px-6 py-5">Salesman</th>
+                            <th class="px-6 py-5">Filename</th>
+                            <th class="px-6 py-5">Score</th>
+                            <th class="px-6 py-5">Summary</th>
+                            <th class="px-6 py-5 text-right">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-700/30">
+                        {% for call in calls %}
+                        <tr class="hover:bg-white/5 transition-colors group">
+                            <td class="px-6 py-4 text-sm text-gray-300 whitespace-nowrap font-mono">
+                                {{ call.upload_date }}
+                            </td>
+                            <td class="px-6 py-4 text-sm font-bold text-white">{{ call.salesman_name }}</td>
+                            <td class="px-6 py-4 text-sm text-gray-400 truncate max-w-[150px]"
+                                title="{{ call.filename }}">{{ call.filename }}</td>
+                            <td class="px-6 py-4">
+                                <span class="px-3 py-1 rounded-full text-xs font-bold shadow-sm
+                                    {% if call.overall_score >= 80 %} bg-green-500/20 text-green-400 border border-green-500/30
+                                    {% elif call.overall_score >= 50 %} bg-yellow-500/20 text-yellow-400 border border-yellow-500/30
+                                    {% else %} bg-red-500/20 text-red-400 border border-red-500/30 {% endif %}">
+                                    {{ call.overall_score }}
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-400 truncate max-w-[250px]">
+                                {{ call.summary }}</td>
+                            <td class="px-6 py-4 text-right whitespace-nowrap">
+                                <div
+                                    class="flex items-center justify-end space-x-3 opacity-80 group-hover:opacity-100 transition-opacity">
+                                    <a href="/reports/{{ call.pdf_path }}" target="_blank"
+                                        class="px-4 py-2 bg-blue-600/20 hover:bg-blue-600 text-blue-400 hover:text-white border border-blue-500/30 text-xs font-bold rounded-lg transition-all flex items-center">
+                                        <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                            </path>
+                                        </svg>
+                                        View
+                                    </a>
+                                    <button onclick="openDeleteModal('{{ call.id }}')"
+                                        class="px-4 py-2 bg-red-600/10 hover:bg-red-600 text-red-400 hover:text-white border border-red-500/30 text-xs font-bold rounded-lg transition-all flex items-center">
+                                        <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                                            </path>
+                                        </svg>
+                                        Delete
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="6" class="px-6 py-16 text-center text-gray-500">
+                                <div class="flex flex-col items-center justify-center">
+                                    <svg class="w-12 h-12 mb-4 text-gray-600" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                            d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                                        </path>
+                                    </svg>
+                                    <p class="text-lg font-medium">No calls analyzed yet</p>
+                                    <p class="text-sm mt-1">Upload a recording to get started</p>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteModal" class="fixed inset-0 z-50 hidden overflow-y-auto" aria-labelledby="modal-title" role="dialog"
+        aria-modal="true">
+        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <!-- Background overlay -->
+            <div class="fixed inset-0 bg-gray-900/80 backdrop-blur-sm transition-opacity" aria-hidden="true"
+                onclick="closeDeleteModal()"></div>
+
+            <!-- Modal panel -->
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+            <div
+                class="inline-block align-bottom bg-gray-800 rounded-2xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full border border-gray-700">
+                <div class="bg-gray-800 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <div class="sm:flex sm:items-start">
+                        <div
+                            class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-900/30 sm:mx-0 sm:h-10 sm:w-10">
+                            <svg class="h-6 w-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                            </svg>
+                        </div>
+                        <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                            <h3 class="text-lg leading-6 font-medium text-white" id="modal-title">
+                                Delete Analysis Record
+                            </h3>
+                            <div class="mt-2">
+                                <p class="text-sm text-gray-400">Are you sure you want to delete this record? This
+                                    action cannot be undone and the report file will be permanently removed.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-800/50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse border-t border-gray-700">
+                    <button type="button" onclick="confirmDelete()"
+                        class="w-full inline-flex justify-center rounded-lg border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm transition-colors">
+                        Delete
+                    </button>
+                    <button type="button" onclick="closeDeleteModal()"
+                        class="mt-3 w-full inline-flex justify-center rounded-lg border border-gray-600 shadow-sm px-4 py-2 bg-transparent text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm transition-colors">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let deleteId = null;
+
+        function openDeleteModal(id) {
+            deleteId = id;
+            document.getElementById('deleteModal').classList.remove('hidden');
+        }
+
+        function closeDeleteModal() {
+            deleteId = null;
+            document.getElementById('deleteModal').classList.add('hidden');
+        }
+
+        async function confirmDelete() {
+            if (deleteId) {
+                try {
+                    const response = await fetch(`/delete/${deleteId}`);
+                    const result = await response.json();
+
+                    if (result.status === 'success') {
+                        // Find the row to remove
+                        const btn = document.querySelector(`button[onclick="openDeleteModal('${deleteId}')"]`);
+                        if (btn) {
+                            const row = btn.closest('tr');
+                            row.style.transition = 'all 0.5s ease';
+                            row.style.opacity = '0';
+                            row.style.transform = 'translateX(20px)';
+                            setTimeout(() => row.remove(), 500);
+                        }
+                        showToast('Record deleted successfully', 'success');
+                        closeDeleteModal();
+                    } else {
+                        showToast('Error deleting record: ' + result.message, 'error');
+                    }
+                } catch (error) {
+                    console.error(error);
+                    showToast('Network error occurred', 'error');
+                }
+            }
+        }
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', function (event) {
+            if (event.key === "Escape") {
+                closeDeleteModal();
+            }
+        });
+
+        // Filter Function
+        function filterTable() {
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+            const scoreFilter = document.getElementById('scoreFilter').value;
+            const table = document.querySelector('table tbody');
+            const rows = table.getElementsByTagName('tr');
+
+            for (let i = 0; i < rows.length; i++) {
+                const row = rows[i];
+                if (row.getElementsByTagName('td').length < 2) continue; // Skip empty/message rows
+
+                const salesman = row.getElementsByTagName('td')[1].textContent.toLowerCase();
+                const filename = row.getElementsByTagName('td')[2].textContent.toLowerCase();
+                const scoreText = row.getElementsByTagName('td')[3].textContent.trim();
+                const score = parseInt(scoreText);
+
+                let matchesSearch = salesman.includes(searchInput) || filename.includes(searchInput);
+                let matchesFilter = true;
+
+                if (scoreFilter === 'high') matchesFilter = score >= 80;
+                else if (scoreFilter === 'medium') matchesFilter = score >= 50 && score < 80;
+                else if (scoreFilter === 'low') matchesFilter = score < 50;
+
+                if (matchesSearch && matchesFilter) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            }
+        }
+
+        // Toast Notification Logic
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            toast.className = `fixed bottom-5 right-5 flex items-center w-full max-w-xs p-4 space-x-4 text-gray-500 bg-gray-800 rounded-lg shadow dark:text-gray-400 dark:bg-gray-800 border border-gray-700 animate-slideUp z-50`;
+
+            let icon = '';
+            if (type === 'success') {
+                icon = `<div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200">
+                            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+                            </svg>
+                        </div>`;
+            } else {
+                icon = `<div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-red-500 bg-red-100 rounded-lg dark:bg-red-800 dark:text-red-200">
+                            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 11.793a1 1 0 1 1-1.414 1.414L10 11.414l-2.293 2.293a1 1 0 0 1-1.414-1.414L8.586 10 6.293 7.707a1 1 0 0 1 1.414-1.414L10 8.586l2.293-2.293a1 1 0 0 1 1.414 1.414L11.414 10l2.293 2.293Z"/>
+                            </svg>
+                        </div>`;
+            }
+
+            toast.innerHTML = `${icon}<div class="pl-4 text-sm font-normal">${message}</div>`;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+    </script>
+</body>
+
+</html>

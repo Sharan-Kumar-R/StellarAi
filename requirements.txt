@@ -1,0 +1,16 @@
+fastapi
+uvicorn
+python-multipart
+jinja2
+deep-translator
+textblob
+fpdf2
+groq
+matplotlib
+httpx
+python-dotenv
+pandas
+openpyxl
+requests
+google-cloud-speech
+google-auth
