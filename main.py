@@ -222,10 +222,16 @@ def convert_to_wav(input_path):
 
 
 
+
 # ---------------------------------------------------------
 # NEW APIs
 # ---------------------------------------------------------
 
+@app.get("/health")
+async def health_check():
+    return {"status": "ok"}
+
+@app.post("/upload")
 @app.post("/api/upload")
 async def upload_audio(background_tasks: BackgroundTasks, audio_file: UploadFile = File(...)):
     """
